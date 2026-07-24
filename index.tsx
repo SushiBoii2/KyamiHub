@@ -1,15 +1,24 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * Vencord Plugin
  */
 
-import definePlugin from "@utils/types";
+import "./styles.css";
 
-import "./styles";
-import { settings } from "./settings";
+import definePlugin from "@utils/types";
 import { openModal } from "@utils/modal";
+
 import { Hub } from "./components/Hub";
+
+function KyamiButton() {
+    return (
+        <div
+            className="kyami-nav-button"
+            onClick={() => openModal(() => <Hub />)}
+        >
+            ✦ Kyami
+        </div>
+    );
+}
 
 export default definePlugin({
     name: "KyamiHub",
@@ -21,18 +30,15 @@ export default definePlugin({
         }
     ],
 
-    settings,
+    patches: [
+        {
+            find: "PRIVATE_CHANNELS",
+            replacement: {
+                match: /children:\[/,
+                replace: "children:[<KyamiButton key='kyami'/>,"
+            }
+        }
+    ],
 
-    start() {
-        console.log("[Kyami] Plugin started.");
-        console.log("[Kyami] Started");
-
-        openModal(props => (
-            <Hub />
-        ));
-    },
-
-    stop() {
-        console.log("[Kyami] Plugin stopped.");
-    }
+    KyamiButton,
 });
