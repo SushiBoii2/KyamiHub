@@ -10,8 +10,35 @@ import definePlugin from "@utils/types";
 import { openModal } from "@utils/modal";
 
 import { Hub } from "./components/Hub";
+import { settings, keybindRecordingState } from "./settings";
 
 let keyListener: ((event: KeyboardEvent) => void) | null = null;
+
+function matchesKeybind(event: KeyboardEvent): boolean {
+    const bind = settings.store.keybind.toLowerCase().trim();
+
+    const parts = bind.split("+");
+
+    const wantsCtrl = parts.includes("ctrl");
+    const wantsShift = parts.includes("shift");
+    const wantsAlt = parts.includes("alt");
+    const wantsMeta = parts.includes("meta");
+
+    const key = parts[parts.length - 1];
+
+    const expectedCode =
+        key.length === 1
+            ? `Key${key.toUpperCase()}`
+            : key;
+
+    return (
+        event.ctrlKey === wantsCtrl &&
+        event.shiftKey === wantsShift &&
+        event.altKey === wantsAlt &&
+        event.metaKey === wantsMeta &&
+        event.code === expectedCode
+    );
+}
 
 export default definePlugin({
     name: "KyamiHub",
@@ -25,8 +52,10 @@ export default definePlugin({
 
     start() {
         keyListener = (event: KeyboardEvent) => {
-            // Ignore if typing in a textbox
+            if (keybindRecordingState.active) return;
+
             const target = event.target as HTMLElement | null;
+
             if (
                 target &&
                 (
@@ -38,19 +67,14 @@ export default definePlugin({
                 return;
             }
 
-            if (
-                event.altKey &&
-                !event.ctrlKey &&
-                !event.shiftKey &&
-                !event.metaKey &&
-                event.code === "KeyK"
-            ) {
-                event.preventDefault();
+            if (!matchesKeybind(event))
+                return;
 
-                openModal(props => (
-                    <Hub {...props} />
-                ));
-            }
+            event.preventDefault();
+
+            openModal(props => (
+                <Hub {...props} />
+            ));
         };
 
         window.addEventListener("keydown", keyListener);
