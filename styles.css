@@ -55,3 +55,27 @@
 .kyami-card:hover {
     background: var(--kyami-hover);
 }
+
+.kyami-nav-button {
+    margin: 4px 8px;
+    padding: 10px 12px;
+
+    color: var(--text-3);
+    background: transparent;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    transition: .15s;
+    user-select: none;
+}
+
+.kyami-nav-button:hover {
+    background: var(--hover);
+    border-color: var(--border);
+}
+
+.kyami-nav-button:active {
+    background: var(--active);
+}
