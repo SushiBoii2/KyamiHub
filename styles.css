@@ -1,7 +1,57 @@
 :root {
     --kyami-bg: var(--bg-4);
-    --kyami-bg-secondary: var(--bg-3);
+    --kyami-surface: var(--bg-3);
     --kyami-text: var(--text-2);
+    --kyami-muted: var(--text-4);
     --kyami-border: var(--border);
     --kyami-hover: var(--hover);
+}
+
+.kyami-root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: var(--kyami-bg);
+    color: var(--kyami-text);
+    font-family: var(--font);
+}
+
+.kyami-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 22px;
+
+    border-bottom: 2px solid var(--kyami-border);
+}
+
+.kyami-header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.kyami-header span {
+    color: var(--kyami-muted);
+}
+
+.kyami-content {
+    padding: 24px;
+}
+
+.kyami-card {
+    margin-top: 18px;
+    padding: 18px;
+
+    background: var(--kyami-surface);
+
+    border: 2px solid var(--kyami-border);
+
+    transition: .15s;
+}
+
+.kyami-card:hover {
+    background: var(--kyami-hover);
 }
