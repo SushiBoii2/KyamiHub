@@ -15,7 +15,7 @@ export default definePlugin({
     authors: [
         {
             name: "Sushi",
-            id: 0n,
+            id: 1524021529782780045n,
         }
     ],
 
