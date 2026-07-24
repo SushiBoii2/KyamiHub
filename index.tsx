@@ -8,6 +8,8 @@ import definePlugin from "@utils/types";
 
 import "./styles";
 import { settings } from "./settings";
+import { openModal } from "@utils/modal";
+import { Hub } from "./components/Hub";
 
 export default definePlugin({
     name: "KyamiHub",
@@ -23,6 +25,11 @@ export default definePlugin({
 
     start() {
         console.log("[Kyami] Plugin started.");
+        console.log("[Kyami] Started");
+
+        openModal(props => (
+            <Hub />
+        ));
     },
 
     stop() {
