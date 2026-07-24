@@ -1,29 +1,17 @@
-/*
- * Vencord, a Discord client mod
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 import React from "react";
 
 export function Hub() {
     return (
-        <div className="kyami-root">
-            <div className="kyami-header">
-                <h1>Kyami</h1>
-                <span>v0.1</span>
-            </div>
+        <div style={{
+            padding: 30,
+            minWidth: 700,
+            minHeight: 450
+        }}>
+            <h1>Kyami Hub</h1>
 
-            <div className="kyami-content">
-                <h2>Welcome to Kyami</h2>
+            <p>Hello there.</p>
 
-                <p>
-                    Your all-in-one productivity hub.
-                </p>
-
-                <div className="kyami-card">
-                    Dashboard coming soon...
-                </div>
-            </div>
+            <p>This is where Calendar, Notes, Reminders and Kyami AI will live.</p>
         </div>
     );
 }
